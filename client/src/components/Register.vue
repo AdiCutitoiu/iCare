@@ -1,8 +1,16 @@
 <template>
   <v-container>
     <v-layout align-center justify-center row fill-height wrap>
-      <v-flex xs4>
+      <v-flex xs12>
+        <v-img :src="require('../assets/logo.svg')" class="my-3" contain height="150"></v-img>
+        <h1 class="text-xs-center blue--text">iCare</h1>
+      </v-flex>
+    </v-layout>
+
+    <v-layout align-center justify-center row fill-height wrap>
+      <v-flex xs10 sm8 md6 lg6 xl6>
         <v-text-field
+          solo
           v-model="name"
           :rules="[rules.required]"
           :type="'text'"
@@ -11,6 +19,7 @@
         ></v-text-field>
 
         <v-text-field
+          solo
           v-model="surname"
           :rules="[rules.required]"
           :type="'text'"
@@ -19,6 +28,7 @@
         ></v-text-field>
 
         <v-text-field
+          solo
           v-model="email"
           :rules="[rules.required, rules.validEmail]"
           :type="'email'"
@@ -27,6 +37,7 @@
         ></v-text-field>
 
         <v-text-field
+          solo
           v-model="password"
           :append-icon="show ? 'visibility_off' : 'visibility'"
           :rules="[rules.required, rules.min]"
@@ -34,11 +45,14 @@
           name="input-10-1"
           label="Password"
           hint="At least 8 characters"
-          counter
+          @focus="passwordFocus = true"
+          @blur="passwordFocus = false"
           @click:append="show = !show"
         ></v-text-field>
 
-        <v-progress-linear slot="progress" :value="progress" :color="color" height="7"></v-progress-linear>
+        <v-progress-linear v-show="passwordFocus" slot="progress" :value="progress" :color="color" height="7"></v-progress-linear>
+
+        <v-btn block color="secondary" class="blue accent-2">Register</v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -50,12 +64,16 @@ export default {
   data: () => ({
     login: true,
     show: false,
+    passwordFocus: false,
     rules: {
       required: value => !!value || "Required.",
       min: v => v.length >= 8 || "Min 8 characters",
       validEmail: email => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase()) || "This is not a valid email address";
+        return (
+          re.test(String(email).toLowerCase()) ||
+          "This is not a valid email address"
+        );
       },
       emailMatch: () => "The email and password you entered don't match"
     },

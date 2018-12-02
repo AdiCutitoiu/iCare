@@ -15,24 +15,24 @@
       <Dashboard/>
     </v-content>
     <v-content v-else>
-      <Login/>
+      <Register/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Login from "./components/Login";
+import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 
 export default {
   name: "App",
   components: {
-    Login,
+    Register,
     Dashboard
   },
   data() {
     return {
-      loggedIn: true
+      loggedIn: false
     };
   }
 };
