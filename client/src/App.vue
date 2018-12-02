@@ -1,26 +1,22 @@
 <template>
   <v-app>
-    <div v-if="loggedIn">
-      <v-toolbar app>
-        <v-toolbar-title class="headline text-uppercase">
-          <span>Vuetify</span>
-          <span class="font-weight-light">MATERIAL DESIGN</span>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
-          <span class="mr-2">Latest Release</span>
-        </v-btn>
-      </v-toolbar>
+    <v-toolbar app v-if="loggedIn">
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Vuetify</span>
+        <span class="font-weight-light">MATERIAL DESIGN</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn flat href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">
+        <span class="mr-2">Latest Release</span>
+      </v-btn>
+    </v-toolbar>
 
-      <v-content>
-        <Dashboard/>
-      </v-content>
-    </div>
-    <div v-else>
-      <v-content>
-        <Login/>
-      </v-content>
-    </div>
+    <v-content v-if="loggedIn">
+      <Dashboard/>
+    </v-content>
+    <v-content v-else>
+      <Login/>
+    </v-content>
   </v-app>
 </template>
 
