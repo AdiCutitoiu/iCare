@@ -18,7 +18,7 @@
     </div>
     <div v-else>
       <v-content>
-        <HelloWorld/>
+        <Login/>
       </v-content>
     </div>
   </v-app>
@@ -26,11 +26,13 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld";
+import Login from "./components/Login";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    HelloWorld,
+    Login
   },
   data() {
     return {
