@@ -13,7 +13,7 @@
       </v-toolbar>
 
       <v-content>
-        <HelloWorld/>
+        <Dashboard/>
       </v-content>
     </div>
     <div v-else>
@@ -25,18 +25,18 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
 import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
-    Login
+    Login,
+    Dashboard
   },
   data() {
     return {
-      loggedIn: false
+      loggedIn: true
     };
   }
 };
