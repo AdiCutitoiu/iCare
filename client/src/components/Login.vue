@@ -1,7 +1,7 @@
 <template>
   <v-card class="elevation-12 flat">
     <v-toolbar dark color="primary">
-      <v-toolbar-title>Register</v-toolbar-title>
+      <v-toolbar-title>Login</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
       <v-form>
@@ -17,43 +17,28 @@
           prepend-icon="lock"
           name="password"
           label="Password"
+          type="password"
           v-model="password"
           :rules="[rules.required, rules.min]"
           hint="At least 8 characters"
-          :append-icon="show ? 'visibility_off' : 'visibility'"
-          :type="show ? 'text' : 'password'"
-          @focus="passwordFocus = true"
-          @blur="passwordFocus = false"
-          @click:append="show = !show"
-        ></v-text-field>
-        <v-text-field
-          v-model="name"
-          :rules="[rules.required]"
-          :type="'text'"
-          prepend-icon="person"
-          name="name"
-          label="Name"
         ></v-text-field>
       </v-form>
       <p class="text-xs-center">
-        Already have an account?
-        <a @click="changeForm">Login</a>
+        Don't have an account?
+        <a @click="changeForm">Register</a>
       </p>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary">Register</v-btn>
+      <v-btn color="primary">Login</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
 export default {
-  name: "Register",
+  name: "Login",
   data: () => ({
-    login: true,
-    show: false,
-    passwordFocus: false,
     rules: {
       required: value => !!value || "Required.",
       min: v => v.length >= 8 || "Min 8 characters",
@@ -66,13 +51,11 @@ export default {
       }
     },
     email: "",
-    name: "",
     password: ""
   }),
   methods: {
     changeForm: function() {
       this.email = "";
-      this.name = "";
       this.password = "";
       this.$emit('changeForm');
     }
