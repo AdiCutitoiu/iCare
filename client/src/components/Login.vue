@@ -13,6 +13,7 @@
           name="email"
           label="E-mail"
         ></v-text-field>
+
         <v-text-field
           prepend-icon="lock"
           name="password"
@@ -23,18 +24,21 @@
           hint="At least 8 characters"
         ></v-text-field>
       </v-form>
+
       <p class="text-xs-center">
         Don't have an account?
         <a @click="changeForm">Register</a>
       </p>
+
+      <v-alert :value="true" type="error" v-show="errorMessage.length != 0">{{errorMessage}}</v-alert>
     </v-card-text>
+
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn color="primary" @click="login" :disabled="disabled">Login</v-btn>
     </v-card-actions>
   </v-card>
 </template>
-
 <script>
 export default {
   name: "Login",
@@ -52,15 +56,20 @@ export default {
     },
     email: "",
     password: "",
-    disabled: false
+    disabled: false,
+    errorMessage: ""
   }),
   methods: {
     changeForm: function() {
       this.email = "";
       this.password = "";
+      this.errorMessage = "";
+      this.disabled = false;
+
       this.$emit("changeForm");
     },
     login: function() {
+      this.errorMessage = "";
       if (!this.$refs.form.validate()) {
         return;
       }
@@ -74,8 +83,7 @@ export default {
           this.disabled = false;
 
           if (err) {
-            // eslint-disable-next-line
-            console.log(err);
+            this.errorMessage = err.toString();
           }
         }
       );

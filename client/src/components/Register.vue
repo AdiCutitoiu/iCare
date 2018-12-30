@@ -39,6 +39,8 @@
         Already have an account?
         <a @click="changeForm">Login</a>
       </p>
+      
+      <v-alert :value="true" type="error" v-show="errorMessage.length != 0">{{errorMessage}}</v-alert>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -68,6 +70,7 @@ export default {
     email: "",
     name: "",
     password: "",
+    errorMessage: "",
     disabled: false
   }),
   methods: {
@@ -75,9 +78,11 @@ export default {
       this.email = "";
       this.name = "";
       this.password = "";
+      this.errorMessage = "";
       this.$emit("changeForm");
     },
     register: function() {
+      this.errorMessage = "";
       if (!this.$refs.form.validate()) {
         return;
       }
@@ -91,8 +96,7 @@ export default {
           this.disabled = false;
 
           if (err) {
-            // eslint-disable-next-line
-            console.log(err.toString());
+            this.errorMessage = err.toString();
           }
         }
       );

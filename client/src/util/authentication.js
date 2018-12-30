@@ -16,6 +16,7 @@ import userData from '../requests/userData'
         }
         catch (err) {
             userData.clear();
+            throw err;
         }
     },
     register: async function (registrationData) {
@@ -32,6 +33,7 @@ import userData from '../requests/userData'
         }
         catch (err) {
             userData.clear();
+            throw err;
         }
     },
     logout: async function () {

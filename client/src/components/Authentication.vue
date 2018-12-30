@@ -29,27 +29,28 @@ export default {
     changeForm: function() {
       this.login = !this.login;
     },
-    handleLogin: function(e, callback) {
-      // eslint-disable-next-line
-      authentication
-        .login(e)
-        .then(() => {
-          callback();
-        })
-        .catch((err) => {
+    handleLogin: async function(e, callback) {
+      
+      try {
+        const data = await authentication.login(e);
+        callback(data);
+      } catch (err) {
+        // eslint-disable-next-line
+        if(callback) {
           callback(err);
-        });
+        }
+      }
     },
-    handleRegister: function(e, callback) {
-      // eslint-disable-next-line
-      authentication
-        .register(e)
-        .then(() => {
-          callback();
-        })
-        .catch((err) => {
+    handleRegister: async function(e, callback) {
+      try {
+        const data = await authentication.register(e);
+        callback(data);
+      } catch (err) {
+        // eslint-disable-next-line
+        if(callback) {
           callback(err);
-        });
+        }
+      }
     }
   }
 };
