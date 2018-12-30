@@ -3,9 +3,9 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-img :src="require('../assets/logo.svg')" class="my-2" contain height="200"></v-img>
-        <h1 class="text-xs-center display-2 mb-3 blue--text text--darken-3" >iCare</h1>
-        <Login v-show="login" @changeForm="changeForm"></Login>
-        <Register v-show="!login" @changeForm="changeForm"></Register>
+        <h1 class="text-xs-center display-2 mb-3 blue--text text--darken-3">iCare</h1>
+        <Login v-show="login" @changeForm="changeForm" @login="handleLogin"></Login>
+        <Register v-show="!login" @changeForm="changeForm" @register="handleRegister"></Register>
       </v-flex>
     </v-layout>
   </v-container>
@@ -14,6 +14,7 @@
 <script>
 import Login from "./Login";
 import Register from "./Register";
+import authentication from "../util/authentication";
 
 export default {
   name: "Authentication",
@@ -27,6 +28,28 @@ export default {
   methods: {
     changeForm: function() {
       this.login = !this.login;
+    },
+    handleLogin: function(e, callback) {
+      // eslint-disable-next-line
+      authentication
+        .login(e)
+        .then(() => {
+          callback();
+        })
+        .catch((err) => {
+          callback(err);
+        });
+    },
+    handleRegister: function(e, callback) {
+      // eslint-disable-next-line
+      authentication
+        .register(e)
+        .then(() => {
+          callback();
+        })
+        .catch((err) => {
+          callback(err);
+        });
     }
   }
 };

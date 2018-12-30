@@ -4,7 +4,7 @@
       <v-toolbar-title>Register</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
-      <v-form>
+      <v-form ref="form">
         <v-text-field
           v-model="email"
           :rules="[rules.required, rules.validEmail]"
@@ -42,7 +42,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary">Register</v-btn>
+      <v-btn color="primary" @click="register" :disabled="disabled">Register</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -67,14 +67,35 @@ export default {
     },
     email: "",
     name: "",
-    password: ""
+    password: "",
+    disabled: false
   }),
   methods: {
     changeForm: function() {
       this.email = "";
       this.name = "";
       this.password = "";
-      this.$emit('changeForm');
+      this.$emit("changeForm");
+    },
+    register: function() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
+
+      this.disabled = true;
+
+      this.$emit(
+        "register",
+        { email: this.email, password: this.password, name: this.name },
+        err => {
+          this.disabled = false;
+
+          if (err) {
+            // eslint-disable-next-line
+            console.log(err.toString());
+          }
+        }
+      );
     }
   }
 };

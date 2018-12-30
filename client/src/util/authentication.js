@@ -1,7 +1,7 @@
 import api from '../requests/api'
 import userData from '../requests/userData'
 
-export default {
+ const authentication = {
     login: async function (credentials) {
         try {
             if(this.isAuthenticated()) {
@@ -34,10 +34,12 @@ export default {
             userData.clear();
         }
     },
-    logout: function () {
+    logout: async function () {
         userData.clear();
     },
     isAuthenticated: function () {
         return !!userData.getToken();
     }
 }
+
+export default authentication;
