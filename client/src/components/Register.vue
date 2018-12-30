@@ -39,8 +39,14 @@
         Already have an account?
         <a @click="changeForm">Login</a>
       </p>
-      
-      <v-alert :value="true" type="error" v-show="errorMessage.length != 0">{{errorMessage}}</v-alert>
+
+      <v-alert
+        :value="true"
+        type="error"
+        transition="scale-transition"
+        dismissible
+        v-show="errorMessage.length != 0"
+      >{{errorMessage}}</v-alert>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -70,8 +76,8 @@ export default {
     email: "",
     name: "",
     password: "",
-    errorMessage: "",
-    disabled: false
+    disabled: false,
+    errorMessage: ""
   }),
   methods: {
     changeForm: function() {

@@ -30,7 +30,13 @@
         <a @click="changeForm">Register</a>
       </p>
 
-      <v-alert :value="true" type="error" v-show="errorMessage.length != 0">{{errorMessage}}</v-alert>
+      <v-alert
+        :value="true"
+        type="error"
+        transition="scale-transition"
+        dismissible
+        v-show="errorMessage.length != 0"
+      >{{errorMessage}}</v-alert>
     </v-card-text>
 
     <v-card-actions>
