@@ -10,7 +10,7 @@
         <span class="mr-2">Latest Release</span>
       </v-btn>
     </v-toolbar-->
-    <v-container fluid fill-height>
+    <v-container v-if="!loggedIn" fluid fill-height>
       <v-layout align-center justify-center>
         <Authentication></Authentication>
       </v-layout>
