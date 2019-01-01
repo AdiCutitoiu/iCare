@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4>
+      <v-flex xs12 sm8 md7>
         <v-img :src="require('../assets/logo.svg')" class="my-2" contain height="200"></v-img>
         <h1 class="text-xs-center display-2 mb-3 blue--text text--darken-3">iCare</h1>
         <Login v-show="login" @changeForm="changeForm" @login="handleLogin"></Login>

@@ -41,7 +41,8 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="primary" @click="login" :disabled="disabled">Login</v-btn>
+      <v-btn color="primary" @click="login" v-show="!disabled">Login</v-btn>
+      <v-progress-circular indeterminate color="primary" v-show="disabled"></v-progress-circular>
     </v-card-actions>
   </v-card>
 </template>
