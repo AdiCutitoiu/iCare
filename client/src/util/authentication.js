@@ -25,7 +25,7 @@ import userData from '../requests/userData'
                 return;
             }
 
-            const response = await api().post('/register', registrationData);
+            const response = await api().post('/register/patient', registrationData);
 
             const token = response.data.token;
             const role = response.data.role;
