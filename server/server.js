@@ -7,7 +7,12 @@ const config = require('./config');
 const passport = require('./src/util/passport');
 const errorHandler = require('./src/middleware/errorHandler');
 
-mongoose.connect(config.dbString, (err) => {
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useCreateIndex: true
+};
+
+mongoose.connect(config.dbString, mongooseOptions, (err) => {
   if (err) {
     console.log('Database connection failed');
     throw err;
