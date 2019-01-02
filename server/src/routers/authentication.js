@@ -1,8 +1,9 @@
 const express = require('express');
 const userModel = require('../models/user');
+const patientModel  = require('../models/patient');
 const AuthenticationController = require('../controllers/authenticationController');
 
-const authenticationController = new AuthenticationController(userModel);
+const authenticationController = new AuthenticationController(userModel, patientModel);
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.post('/login', async (req, res) => {
         res.json(token);
     } catch (error) {
         console.error(error);
+        res.status(500).end();
     }
 });
 
@@ -36,6 +38,7 @@ router.post('/register/patient', async (req, res) => {
         res.json(token);
     } catch (error) {
         console.error(error);
+        res.status(500).end();
     }
 });
 

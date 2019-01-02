@@ -18,6 +18,8 @@ passport.use(new JwtStrategy(opts, async function (payload, done) {
 			return done(null, false);
 		}
 
+		await user.populate('userData');
+
 		return done(null, user);
 	} catch (err) {
 		return done(err, false);

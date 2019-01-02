@@ -17,9 +17,9 @@ const userSchema = new mongoose.Schema({
     default: 'Normal'
   },
   userData: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
-    refPath: role
+    refPath: 'role'
   }
 });
 

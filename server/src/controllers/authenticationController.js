@@ -1,51 +1,65 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const secret = 'secret';
+
 class AuthenticationController {
-    constructor(userModel) {
-        this._userModel = userModel;
+    constructor(userModel, patientModel) {
+        this.userModel = userModel;
+        this.patientModel = patientModel;
     }
 
     async login(email, password) {
-        const user = await this._userModel.findOne({ email });
+        const user = await this.userModel.findOne({ email });
 
-        if(!user) {
+        if (!user) {
             throw new Error('The user does not exist');
         }
 
-        const isPasswordMatch = await bcrypt.compare(password, user.password);
-        if(isPasswordMatch) {
-            const payload = user;
-            delete payload.password;
+        const isPasswordMatch = await bcrypt.compareSync(password, user.passwordHash);
+        if (isPasswordMatch) {
+            const payload = {
+                email: user.email,
+                role: user.role,
+                userData: user.userData
+            };
 
-            return { token: jwt.sign(payload) };
+            return { token: jwt.sign(payload, secret) };
         }
 
         throw new Error('Bad password');
     }
 
     async registerPatient(email, password, name) {
-        const user = await this._userModel.findOne({ email });
+        let user = await this.userModel.findOne({ email });
 
-        if(!user) {
+        if (user) {
             throw new Error('The email already exists');
         }
 
-        const hashedPassword = bcrypt.hash(password)
-        const user = await this._userModel.create({
-            email: email,
-            passwordHash: hashedPassword,
-            role: 'Patient'
+        const patientData = await this.patientModel.create({
+            name
         });
 
-        if(!user) {
+        if (!patientData) {
             throw new Error('Unexpected error');
         }
 
-        const payload = user;
-        delete payload.password;
+        const hashedPassword = bcrypt.hashSync(password)
+        user = await this.userModel.create({
+            email: email,
+            passwordHash: hashedPassword,
+            role: 'Patient',
+            userData: patientData._id
+        });
 
-        return { token: jwt.sign(payload) };
+        const payload = {
+            email: user.email,
+            role: user.role,
+            userData: user.userData
+        };
+
+        return { token: jwt.sign(payload, secret) };
     }
 }
 
