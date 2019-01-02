@@ -21,7 +21,8 @@ class AuthenticationController {
             const payload = {
                 email: user.email,
                 role: user.role,
-                userData: user.userData
+                userData: user.userData,
+                id: user.id
             };
 
             return { token: jwt.sign(payload, secret) };
@@ -56,7 +57,8 @@ class AuthenticationController {
         const payload = {
             email: user.email,
             role: user.role,
-            userData: user.userData
+            userData: user.userData,
+            id: user.id
         };
 
         return { token: jwt.sign(payload, secret) };
