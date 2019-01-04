@@ -6,6 +6,7 @@ const mainRouter = require('./src/routers/mainRouter');
 const config = require('./config');
 const passport = require('./src/util/passport');
 const errorHandler = require('./src/middleware/errorHandler');
+const cors = require('cors');
 
 const mongooseOptions = {
   useNewUrlParser: true,
@@ -22,6 +23,7 @@ mongoose.connect(config.dbString, mongooseOptions, (err) => {
 
   server.use(morgan('combined'));
   server.use(bodyParser.json());
+  server.use(cors());
   server.use(passport.initialize());
   server.use('/', mainRouter);
   server.use(errorHandler);

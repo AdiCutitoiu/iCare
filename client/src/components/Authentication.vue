@@ -30,24 +30,25 @@ export default {
       this.login = !this.login;
     },
     handleLogin: async function(e, callback) {
-      
       try {
-        const data = await authentication.login(e);
-        callback(data);
+        await authentication.login(e);
+        callback(null);
+
+        this.$emit("loggedIn");
       } catch (err) {
-        // eslint-disable-next-line
-        if(callback) {
+        if (callback) {
           callback(err);
         }
       }
     },
     handleRegister: async function(e, callback) {
       try {
-        const data = await authentication.register(e);
-        callback(data);
+        await authentication.register(e);
+        callback(null);
+
+        this.$emit("loggedIn");
       } catch (err) {
-        // eslint-disable-next-line
-        if(callback) {
+        if (callback) {
           callback(err);
         }
       }

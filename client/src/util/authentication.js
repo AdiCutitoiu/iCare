@@ -8,9 +8,13 @@ import userData from '../requests/userData'
                 return;
             }
 
-            const response = await api().post('/login', credentials);
+            const response = await api().post('/auth/login', credentials, { useCredentails: true });
 
             const token = response.data.token;
+            
+            // eslint-disable-next-line
+            console.log(token);
+
             const role = response.data.role;
             userData.setToken(token, role);
         }
@@ -25,7 +29,7 @@ import userData from '../requests/userData'
                 return;
             }
 
-            const response = await api().post('/register/patient', registrationData);
+            const response = await api().post('/auth/register/patient', registrationData, { useCredentails: true });
 
             const token = response.data.token;
             const role = response.data.role;

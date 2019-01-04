@@ -10,28 +10,34 @@
         <span class="mr-2">Latest Release</span>
       </v-btn>
     </v-toolbar-->
+
     <v-container v-if="!loggedIn" fluid fill-height>
       <v-layout align-center justify-center>
-        <Authentication></Authentication>
+        <Authentication @loggedIn="loggedIn = true"></Authentication>
+      </v-layout>
+    </v-container>
+    <v-container v-else>
+      <v-layout align-center justify-center>
+        <Dashboard></Dashboard>
       </v-layout>
     </v-container>
   </v-app>
 </template>
 
 <script>
-//import Login from "./components/Login";
 import Authentication from "./components/Authentication";
-//import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard";
+import auth from "./util/authentication";
 
 export default {
   name: "App",
   components: {
-    Authentication
-    //Dashboard
+    Authentication,
+    Dashboard
   },
   data() {
     return {
-      loggedIn: false
+      loggedIn: auth.isAuthenticated()
     };
   }
 };
