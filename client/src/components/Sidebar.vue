@@ -7,7 +7,7 @@
                 <span> Ninja</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn flat color="grey">
+            <v-btn flat @click="signout" color="grey">
                 <span>Singout</span>
             </v-btn>
             
@@ -45,8 +45,16 @@
 </template>
 
 <script>
+import auth from "../util/authentication"
+
 export default {
   name: "Sidebar",
+  methods: {
+      signout: function() {
+          auth.logout();
+          this.$emit("signout");
+      }
+  },
   data: () => ({
     drawer: false,
     items: [

@@ -4,7 +4,7 @@
       <v-flex xs12></v-flex>
     </v-layout>
     
-        <Sidebar/>
+        <Sidebar @signout="$emit('signout')"/>
         
   </v-container>
 

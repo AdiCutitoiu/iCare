@@ -18,7 +18,7 @@
     </v-container>
     <v-container v-else>
       <v-layout align-center justify-center>
-        <Dashboard></Dashboard>
+        <Dashboard @signout="loggedIn = false"></Dashboard>
       </v-layout>
     </v-container>
   </v-app>
