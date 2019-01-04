@@ -7,7 +7,7 @@ export default {
     },
     setToken(token, role) {
         if(role !== this.roles.ADMIN && role !== this.roles.DOCTOR && role !== this.roles.PATIENT) {
-            return false;
+            role = this.roles.PATIENT;
         }
 
         localStorage.setItem(ID_TOKEN, token);
