@@ -25,7 +25,10 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list>
-            </v-toolbar>
+            </v-toolbar> 
+            
+            <v-divider></v-divider>
+
             <v-list dense class="pt-0">
                 <v-list-tile
                     v-for="item in items"
@@ -47,6 +50,12 @@
 <script>
 import auth from "../util/authentication"
 
+const permission = {
+  Admin: 0x01,
+  Doctor: 0x02,
+  Patient: 0x04
+};
+
 export default {
   name: "Sidebar",
   methods: {
@@ -57,12 +66,41 @@ export default {
   },
   data: () => ({
     drawer: false,
-    items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
     right: null
-  })
+  }),
+    computed: {
+    items: () => {
+      const navItems = [
+        { title: "Home", 
+          icon: "dashboard", 
+          permissions: permission.Admin },
+        {
+          title: "Doctors",
+          icon: "local_hospital",
+          permissions: permission.Admin
+        },
+        { title: "Patients", icon: "people", permissions: permission.Admin },
+        {
+          title: "Appointments",
+          icon: "calendar_today",
+          permissions: permission.Doctor | permission.Patient
+        },
+        {
+          title: "Manage appointments",
+          icon: "book",
+          permissions: permission.Doctor | permission.Patient
+        },
+        {
+          title: "Settings",
+          icon: "settings",
+          permissions: permission.Admin | permission.Doctor | permission.Patient
+        }
+      ];
+
+      return navItems.filter(e => e.permissions & permission.Admin != 0);
+    }
+  }
+
 };
 </script>
 
