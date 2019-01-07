@@ -4,9 +4,10 @@ const jwt = require('jsonwebtoken');
 const secret = 'secret';
 
 class AuthenticationController {
-    constructor(userModel, patientModel) {
+    constructor(userModel, patientModel, doctorModel) {
         this.userModel = userModel;
         this.patientModel = patientModel;
+        this.doctorModel = doctorModel;
     }
 
     async login(email, password) {
@@ -52,6 +53,39 @@ class AuthenticationController {
             passwordHash: hashedPassword,
             role: 'Patient',
             userData: patientData._id
+        });
+
+        const payload = {
+            email: user.email,
+            role: user.role,
+            userData: user.userData,
+            id: user.id
+        };
+
+        return { token: jwt.sign(payload, secret) };
+    }
+
+    async registerDoctor(email, password, name) {
+        let user = await this.userModel.findOne({ email });
+
+        if (user) {
+            throw new Error('The email already exists');
+        }
+
+        const doctorData = await this.doctorModel.create({
+            name
+        });
+
+        if (!doctorData) {
+            throw new Error('Unexpected error');
+        }
+
+        const hashedPassword = bcrypt.hashSync(password)
+        user = await this.userModel.create({
+            email: email,
+            passwordHash: hashedPassword,
+            role: 'Doctor',
+            userData: doctorData._id
         });
 
         const payload = {
