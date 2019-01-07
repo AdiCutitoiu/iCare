@@ -5,20 +5,20 @@
     </v-layout>
 
         <Sidebar @signout="$emit('signout')"/>
-        <CardsGrid></CardsGrid>
+        <Agenda></Agenda>
   </v-container>
 
 </template>
 
 <script>
 import Sidebar from "./Sidebar";
-import CardsGrid from "./CardsGrid";
+import Agenda from "./Agenda";
 
 export default {
   name: "Dashboard",
   components: {
     Sidebar,
-    CardsGrid
+    Agenda
   },
   data: () => ({})
 };
