@@ -25,7 +25,7 @@ const appointmentSchema = new mongoose.Schema({
                 return date.valueOf() % 900000 === 0;
             },
             message: () => {
-                return `Dates which have a value multiple of 900.000 are under the form
+                return `Dates must be under the form
                         hh:00:00
                         hh:15:00
                         hh:30:00
