@@ -1,8 +1,12 @@
 const express = require('express');
 const DoctorController = require('../controllers/doctorController');
 const doctorModel = require('../models/doctor');
+const AuthenticationController = require('../controllers/authenticationController');
+const userModel = require('../models/user');
+const patientModel = require('../models/patient');
 
 const doctorController = new DoctorController(doctorModel);
+const authenticationController = new AuthenticationController(userModel, patientModel, doctorModel);
 
 const router = express.Router();
 
@@ -18,7 +22,10 @@ router
     })
     .post(async (req, res, next) => {
         try {
-            res.json(await doctorController.create(req.body));
+            const { email, password, name } = req.body;
+            authenticationController.registerDoctor(email, password, name);
+
+            res.status(201).end();
         } catch (err) {
             console.log(err);
             res.status(500).end();

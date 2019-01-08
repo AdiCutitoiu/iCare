@@ -94,8 +94,6 @@ class AuthenticationController {
             userData: user.userData,
             id: user.id
         };
-
-        return { token: jwt.sign(payload, secret) };
     }
 }
 

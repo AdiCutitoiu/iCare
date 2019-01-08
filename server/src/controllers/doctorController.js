@@ -11,10 +11,6 @@ class DoctorController {
         return await this.doctorModel.findById(id); 
     }
 
-    async create(doctor) {
-        return await this.doctorModel.create(doctor);
-    }
-
     async delete(id) {
         return await this.doctorModel.findByIdAndRemove(id);
     }
