@@ -26,7 +26,7 @@ class AuthenticationController {
                 id: user.id
             };
 
-            return { token: jwt.sign(payload, secret) };
+            return { token: jwt.sign(payload, secret), role: user.role };
         }
 
         throw new Error('Bad password');
@@ -62,7 +62,7 @@ class AuthenticationController {
             id: user.id
         };
 
-        return { token: jwt.sign(payload, secret) };
+        return { token: jwt.sign(payload, secret), role: user.role };
     }
 
     async registerDoctor(email, password, name) {
