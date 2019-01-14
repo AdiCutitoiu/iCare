@@ -3,8 +3,8 @@
         <v-toolbar flat app>
             <v-toolbar-side-icon class="grey--text" @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title class="text-uppercase grey--text">
-                <span class="font-weight-light"> Todo </span>
-                <span> Ninja</span>
+                <span class="font-weight-light text-lowercase">i </span>
+                <span> Care</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn flat @click="signout" color="grey">
@@ -33,7 +33,9 @@
                 <v-list-tile
                     v-for="item in items"
                     :key="item.title"
-                    @click="drawer = !drawer">
+                    @click="drawer = !drawer"
+                    router :to="item.route">
+                    
             <v-list-tile-action>
                 <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -72,27 +74,37 @@ export default {
     items: () => {
       const navItems = [
         { title: "Home", 
-          icon: "dashboard", 
+          icon: "dashboard",
+          route: "/agenda" , 
           permissions: permission.Admin },
         {
           title: "Doctors",
           icon: "local_hospital",
+          route: "/doctors",
           permissions: permission.Admin
         },
-        { title: "Patients", icon: "people", permissions: permission.Admin },
+        { 
+            title: "Patients", 
+            icon: "people", 
+            route: "/patients",
+            permissions: permission.Admin 
+        },
         {
           title: "Appointments",
           icon: "calendar_today",
+          route: "/yourAppointments", 
           permissions: permission.Doctor | permission.Patient
         },
         {
           title: "Manage appointments",
           icon: "book",
+          route: "/manageAppointments", 
           permissions: permission.Doctor | permission.Patient
         },
         {
           title: "Settings",
           icon: "settings",
+          route: "/settings", 
           permissions: permission.Admin | permission.Doctor | permission.Patient
         }
       ];

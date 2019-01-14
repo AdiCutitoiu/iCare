@@ -3,21 +3,14 @@
     <v-layout text-xs-center wrap>
       <v-flex xs12></v-flex>
     </v-layout>
-
-        <Sidebar @signout="$emit('signout')"/>
-        <router-view></router-view>
   </v-container>
 
 </template>
 
-<script>
-import Sidebar from "./Sidebar";
+<script> 
 
 export default {
-  name: "Dashboard",
-  components: {
-    Sidebar
-  },
+  name: "Patients",
   data: () => ({})
 };
 </script>
