@@ -16,7 +16,7 @@ import userData from '../requests/userData'
             console.log(token);
 
             const role = response.data.role;
-            userData.setToken(token, role);
+            userData.setToken(token, userData.roles[role]);
         }
         catch (err) {
             userData.clear();

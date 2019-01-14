@@ -6,8 +6,8 @@ export default {
         return localStorage.getItem(ID_TOKEN);
     },
     setToken(token, role) {
-        if(role !== this.roles.ADMIN && role !== this.roles.DOCTOR && role !== this.roles.PATIENT) {
-            role = this.roles.PATIENT;
+        if(role !== this.roles.Admin && role !== this.roles.Doctor && role !== this.roles.Patient) {
+            role = this.roles.Patient;
         }
 
         localStorage.setItem(ID_TOKEN, token);
@@ -19,17 +19,17 @@ export default {
         localStorage.removeItem(ID_ROLE);
     },
     isAdmin() {
-        return localStorage.getItem(ID_ROLE) === this.roles.ADMIN;
+        return localStorage.getItem(ID_ROLE) === this.roles.Admin;
     },
     isDoctor() {
-        return localStorage.getItem(ID_ROLE) === this.roles.DOCTOR;
+        return localStorage.getItem(ID_ROLE) === this.roles.Doctor;
     },
     isPatient() {
-        return localStorage.getItem(ID_ROLE) === this.roles.PATIENT;
+        return localStorage.getItem(ID_ROLE) === this.roles.Patient;
     },
     roles: {
-        ADMIN: 1,
-        DOCTOR: 2,
-        PATIENT: 3
+        Admin: 1,
+        Doctor: 2,
+        Patient: 3
     }
 };
