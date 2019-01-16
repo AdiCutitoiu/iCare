@@ -39,52 +39,52 @@ function getModel() {
 
 describe('DoctorController', function () {
   describe('getAll()', function () {
-    it('should get all the patients', async function () {
+    it('should get all the doctors', async function () {
       const controller = new DoctorController(getModel());
 
-      const patients = await controller.getAll();
+      const doctors = await controller.getAll();
 
-      expect(patients.length).to.be.equal(2);
-      expect(patients[0].id).to.be.equal('1');
-      expect(patients[1].id).to.be.equal('2');
+      expect(doctors.length).to.be.equal(2);
+      expect(doctors[0].id).to.be.equal('1');
+      expect(doctors[1].id).to.be.equal('2');
     });
   });
 
   describe('get(id)', function () {
-    it('should return a patient', async function () {
+    it('should return a doctor', async function () {
       const model = getModel();
       const controller = new DoctorController(model);
 
-      const patient = await controller.get('1');
+      const doctor = await controller.get('1');
 
-      expect(patient).to.deep.equal(model.data[0]);
+      expect(doctor).to.deep.equal(model.data[0]);
     });
 
     it('should return null', async function () {
       const controller = new DoctorController(getModel());
 
-      const patient = await controller.get('5');
+      const doctor = await controller.get('5');
 
-      expect(patient).to.be.undefined;
+      expect(doctor).to.be.undefined;
     });
   });
 
   describe('delete(id)', function () {
-    it('should delete a patient', async function () {
+    it('should delete a doctor', async function () {
       const controller = new DoctorController(getModel());
 
-      const patient = await controller.delete('1');
+      const doctor = await controller.delete('1');
 
-      expect(patient._eraseCalled).to.be.true;
+      expect(doctor._eraseCalled).to.be.true;
     });
 
     it('should not delete anything', async function () {
       const model = getModel();
       const controller = new DoctorController(model);
 
-      const patient = await controller.delete('5');
+      const doctor = await controller.delete('5');
 
-      expect(patient).to.be.null;
+      expect(doctor).to.be.null;
     });
   });
 });
