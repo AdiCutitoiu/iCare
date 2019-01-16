@@ -1,10 +1,6 @@
 const expect = require('chai').expect;
 const DoctorController = require('../src/controllers/doctorController');
 
-function addTwoNumbers(x, y) {
-  return x + y;
-}
-
 function getModel() {
   const data = [{
     id: '1',
