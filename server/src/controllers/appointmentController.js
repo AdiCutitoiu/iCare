@@ -10,6 +10,12 @@ class AppointmentController {
         if (currentDate.valueOf() >= date.valueOf()) {
             return null;
         }
+
+        // do not allow having 2 appointments at the same time
+        const appointment = await this.appointmentModel.findOne({ date: currentDate });
+        if(appointment) {
+            return null;
+        }
         
         return await this.appointmentModel.create({
             patient: patientId,
