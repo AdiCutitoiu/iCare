@@ -12,7 +12,7 @@ class PatientController {
     }
 
     async delete(id) {
-        const patient = await this.doctorModel.findById(id).remove();
+        const patient = await this.doctorModel.findById(id);
         if(!patient) {
             return null;
         }
