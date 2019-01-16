@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Dashboard from './components/Dashboard.vue'
 import Agenda from './components/Agenda'
 import Patients from './components/Patients'
+import Doctors from './components/Doctors'
 import Authentication from './components/Authentication'
 
 Vue.use(Router)
@@ -31,6 +32,11 @@ export default new Router({
         path: '/authentication',
         name: 'Authentication',
         component: Authentication
+    },
+    {
+        path: '/doctors',
+        name: 'Doctors',
+        component: Doctors
     }
 ]
 })
