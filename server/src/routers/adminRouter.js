@@ -42,7 +42,7 @@ router
     .route('/doctors/:id')
     .delete(async (req, res, next) => {
         try {
-            const doctor = await doctorController.delete(id);
+            const doctor = await doctorController.delete(req.params.id);
 
             if(!doctor) {
                 res.status(404).end();
@@ -71,7 +71,7 @@ router
     .route('/patient/:id')
     .delete(async (req, res, next) => {
         try {
-            const patient = await patientController.delete(id);
+            const patient = await patientController.delete(req.params.id);
 
             if(!patient) {
                 res.status(404).end();
