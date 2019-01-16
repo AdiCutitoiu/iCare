@@ -35,7 +35,7 @@ router.post('/register/patient', async (req, res) => {
         }
 
         const token = await authenticationController.registerPatient(email, password, name);
-        res.json(token);
+        res.status(201).json(token);
     } catch (error) {
         console.error(error);
         res.status(500).end();
