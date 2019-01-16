@@ -11,7 +11,7 @@ router
     .route('/appointments')
     .get(async (req, res, next) => {
         try {
-            const appointments = appointmentController.getAllForDoctor(req.user.userData.id);
+            const appointments = await appointmentController.getAllForDoctor(req.user.userData.id);
 
             res.json(appointments);
         } catch (err) {
@@ -24,7 +24,7 @@ router
     .route('/appointments/:id/approve')
     .put(async (req, res, next) => {
         try {
-            const appointment = appointmentController.approve(req.params.id);
+            const appointment = await appointmentController.approve(req.params.id);
 
             if (!appointment) {
                 res.status(404).end();
@@ -47,7 +47,7 @@ router
     .route('/appointments/:id/cancel')
     .put(async (req, res, next) => {
         try {
-            const appointment = appointmentController.cancel(req.params.id);
+            const appointment = await appointmentController.cancel(req.params.id);
 
             if (!appointment) {
                 res.status(404).end();

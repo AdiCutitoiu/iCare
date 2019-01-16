@@ -25,7 +25,7 @@ router
     .route('/appointments')
     .get(async (req, res, next) => {
         try {
-            const appointments = appointmentController.getAllForPatient(req.user.userData.id);
+            const appointments = await appointmentController.getAllForPatient(req.user.userData.id);
 
             res.json(appointments);
         } catch (err) {
@@ -36,7 +36,7 @@ router
     .post(async (req, res, next) => {
         try {
             const { doctorId, date } = req.body;
-            const appointment = appointmentController.create(req.user.userData.id, doctorId, date);
+            const appointment = await appointmentController.create(req.user.userData.id, doctorId, new Date(date));
 
             if(!appointment) {
                 return res.status(400).end();
@@ -53,7 +53,7 @@ router
     .route('/appointments/:id/cancel')
     .put(async (req, res, next) => {
         try {
-            const appointment = appointmentController.cancel(req.params.id);
+            const appointment = await appointmentController.cancel(req.params.id);
 
             if(!appointment) {
                 res.status(404).end();

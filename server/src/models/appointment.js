@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const appointmentSchema = new mongoose.Schema({
     patient: {
         type: String,
-        unique: true,
         required: true
     },
     doctor: {

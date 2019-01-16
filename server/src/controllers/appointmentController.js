@@ -12,11 +12,15 @@ class AppointmentController {
         }
 
         // do not allow having 2 appointments at the same time
-        const appointment = await this.appointmentModel.findOne({ date: currentDate });
-        if(appointment) {
+        const appointment = await this.appointmentModel.findOne({
+            date: date,
+            doctor: doctorId,
+            status: { $ne: 'Canceled' }
+        });
+        if (appointment) {
             return null;
         }
-        
+
         return await this.appointmentModel.create({
             patient: patientId,
             doctor: doctorId,
