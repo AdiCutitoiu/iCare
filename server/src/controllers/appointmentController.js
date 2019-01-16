@@ -47,7 +47,7 @@ class AppointmentController {
     }
 
     async cancel(appointmentId) {
-        await this.appointmentModel.findOneAndUpdate({ _id: appointmentId }, { status: 'Canceled' }, { new: true });
+        return await this.appointmentModel.findOneAndUpdate({ _id: appointmentId }, { status: 'Canceled' }, { new: true });
     }
 
     async getAllForDoctor(doctorId) {
