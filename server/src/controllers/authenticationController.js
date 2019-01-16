@@ -88,12 +88,7 @@ class AuthenticationController {
             userData: doctorData._id
         });
 
-        const payload = {
-            email: user.email,
-            role: user.role,
-            userData: user.userData,
-            id: user.id
-        };
+        return doctorData;
     }
 }
 

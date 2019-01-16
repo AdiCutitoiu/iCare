@@ -7,4 +7,8 @@ const patientSchema = new mongoose.Schema({
   }
 });
 
+patientSchema.pre('remove', function () {
+  user.findOneAndRemove({ role: 'Patient', useData: this.id });
+});
+
 module.exports = mongoose.model('Patient', patientSchema);

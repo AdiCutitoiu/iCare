@@ -25,9 +25,13 @@ router
     .post(async (req, res, next) => {
         try {
             const { email, password, name } = req.body;
-            authenticationController.registerDoctor(email, password, name);
+            
+            const doctor = await authenticationController.registerDoctor(email, password, name);
+            if(!doctor) {
+                res.status(400).end();
+            }
 
-            res.status(201).end();
+            res.status(201).json(doctor);
         } catch (err) {
             console.log(err);
             res.status(500).end();
